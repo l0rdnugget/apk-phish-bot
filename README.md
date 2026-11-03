@@ -1,6 +1,6 @@
 # APK Phishing Analysis Bot
 
-A Python tool your team can use to triage suspected phishing APKs. Drop an APK in, get a Markdown + JSON report out, and optionally diff the suspect against a known-legitimate reference APK.
+A Python tool your team can use to triage suspected phishing APKs. Drop an APK in, get a Markdown + JSON report out and optionally diff the suspect against a known legitimate reference APK.
 
 ## What it extracts
 
@@ -18,9 +18,9 @@ A Python tool your team can use to triage suspected phishing APKs. Drop an APK i
 
 ## Compare mode
 
-Pass `--reference legit.apk` and the report adds a diff section. The most valuable signal here is the **signing certificate SHA-256** — legitimate updates from the same publisher always preserve the signing key. A certificate mismatch on an app that claims to be the same package is one of the strongest phishing indicators you can get.
+Pass `--reference legit.apk` and the report adds a diff section. The **signing certificate SHA-256** provides insight on the certificate. A certificate mismatch on an app that claims to be the same package is a phishing indicator.
 
-The diff also shows added/removed permissions, activities, services, receivers, URLs, and domains.
+The diff also shows added/removed permissions, activities, services, receivers, URLs and domains.
 
 ## Setup
 
@@ -58,10 +58,10 @@ apk_phish_bot/
 requirements.txt
 ```
 
-Each module is small and focused so you can wrap `analyze_apk()` / `assess()` / `diff_reports()` / `render_markdown()` in whatever front-end you like later — a Slack bot, Discord bot, or Flask upload page can all call the same functions.
+Each module is small and focused so you can wrap `analyze_apk()` / `assess()` / `diff_reports()` / `render_markdown()` in whatever front-end you like later, such as; a Slack bot, Discord bot.
 
 ## Scope and limits
 
-- **APK only for now.** IPA support is a separate (larger) lift — App Store binaries are FairPlay-encrypted and need decryption on a jailbroken device first. Open a follow-up when you want to tackle it.
-- **Triage, not verdict.** High risk score means "a human should look at this," not "this is definitely malware." Treat the tool as a fast forensic extractor.
-- **Only analyze apps you have permission to analyze** — your own apps, samples from your team's phishing reports, or targets under an authorized engagement.
+- **APK only for now.** IPA support is a separate (larger) lift: App Store binaries are FairPlay encrypted and need decryption on a jailbroken device first. Open a follow-up when you want to tackle it.
+- **Triage, not verdict.** High risk score means: "a human should look at this," not "this is definitely malware." Treat the tool as a fast forensic extractor.
+- **Only analyze apps you have permission to analyze**: your own apps, samples from your team's phishing reports or targets under an authorized engagement.
